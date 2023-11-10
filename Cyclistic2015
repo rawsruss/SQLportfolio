@@ -1,0 +1,31 @@
+CREATE TABLE cy2015.allyear (
+usertype STRING,
+tripduration_min_rd_ FLOAT64,
+starttime TIMESTAMP,
+stoptime TIMESTAMP,
+);
+
+INSERT INTO cy2015.allyear (usertype, startdate, startday, starttime, startmonth, tripduration)
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q1`
+UNION ALL
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q2`
+UNION ALL
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q31`
+UNION ALL
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q32`
+UNION ALL
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q33`
+UNION ALL
+SELECT usertype, startdate, startday, starttime, startmonth, tripduration
+FROM `cy2015.q4`
+
+DELETE FROM`cy2015.allyear`
+WHERE usertype = 'Dependent';
+
+DELETE FROM `cy2015.allyear`
+WHERE usertype IS NULL;
